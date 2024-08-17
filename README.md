@@ -38,11 +38,11 @@ pip install .
 
 **Requirements**
 
-- torch
-- einops
-- tiktoken [optional] (tokenizer used for pre-trained language models)
-- huggingface_hub [optional] (for loading pre-trained model checkpoints from HF)
-- safetensors [optional] (again, for loading pre-trained model checkpoints from HF)
+- `torch`
+- `einops`
+- `tiktoken` [optional] (tokenizer used for pre-trained language models)
+- `huggingface_hub` [optional] (for loading pre-trained model checkpoints from HF)
+- `safetensors` [optional] (again, for loading pre-trained model checkpoints from HF)
 
 
 ## Summary of Paper
