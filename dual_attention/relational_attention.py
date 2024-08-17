@@ -52,7 +52,7 @@ class RelationalAttention(nn.Module):
         receiver's features via softmax attention scores.
 
         The learnable parameters include a set of query/key projections which determine the attention scores, and hence
-        the ``selection criteria'', as well as a set of query/key projections for computing relations between objects.
+        the "selection criteria", as well as a set of query/key projections for computing relations between objects.
         They also include per-head projections for the symbols and relations, as well as a final output projection.
 
         This module supports symmetric relations, position-relative symbolic embeddings,
@@ -148,11 +148,14 @@ class RelationalAttention(nn.Module):
         is_causal: bool = False # indicates causal mask (will be computed automatically); should only set one of is_causal and attn_mask
         ):
         """
-        compute attention with given query, key, value.
+        compute relational attention value.
 
         if freqs_cos and freqs_sin are given, apply rotary positional embeddings.
+
         if attn_mask is given, apply attention mask.
+
         if is_causal is True, apply causal mask (attn_mask must be None).
+
         if use_relative_positional_symbols is True, the symbols are treated as relative positional embeddings.
             assumed to be of shape [len, len, dim] where len is the length of the sequence x.
 
@@ -407,7 +410,9 @@ class RelationalCrossAttention(nn.Module):
         compute relational cross-attention attention with given input x and symbols.
 
         if attn_mask is given, apply attention mask.
+
         if is_causal is True, apply causal mask (attn_mask must be None).
+
         if use_relative_pos_symbols is True, the symbols are treated as relative positional embeddings.
             assumed to be of shape [len, len, dim] where len is the length of the sequence x.
 
@@ -602,8 +607,11 @@ class DisentangledRelationalCrossAttention(nn.Module):
         compute attention with given query, key, value.
 
         if freqs_cos and freqs_sin are given, apply rotary positional embeddings.
+
         if attn_mask is given, apply attention mask.
+
         if is_causal is True, apply causal mask (attn_mask must be None).
+
         if use_relative_positional_symbols is True, the symbols are treated as relative positional embeddings.
             assumed to be of shape [len, len, dim] where len is the length of the sequence x.
 
