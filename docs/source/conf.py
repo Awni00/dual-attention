@@ -7,9 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import sys, os
-sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('../'))
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('../../dual_attention/'))
 
 project = 'Dual Attention'
@@ -33,4 +31,18 @@ exclude_patterns = []
 
 # html_theme = 'alabaster'
 html_theme = 'sphinx_book_theme'
+# html_theme = 'sphinx_rtd_theme'
+# html_theme = 'pydata_sphinx_theme'
 html_static_path = ['_static']
+
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__'
+}
+
+# html_theme_options = {
+#   "show_nav_level": 2 # specific to pydata sphinx theme
+# }
