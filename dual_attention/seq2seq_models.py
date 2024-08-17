@@ -1,3 +1,7 @@
+"""
+This module implements Encoder-Decoder Sequence-to-Sequence models (both Dual Attention Transformer and standard Transformer).
+"""
+
 import torch
 from torch import nn
 

@@ -1,3 +1,8 @@
+"""
+This module implements Encoder and Decoder Blocks for a Dual Attention Transformer.
+Each block consists of Dual Attention, (Cross-Attention in the case of the Decoder), Feed-Forward Block, LayerNorms/Residuals.
+"""
+
 import torch
 import torch.nn as nn
 from .dual_attention import DualAttention

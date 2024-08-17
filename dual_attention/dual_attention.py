@@ -1,3 +1,8 @@
+"""
+This module implements Dual Attention: a variant of multi-head attention with two distinct types of attention heads:
+self-attention and relational attention.
+"""
+
 import torch
 import torch.nn as nn
 

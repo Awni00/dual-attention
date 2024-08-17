@@ -1,3 +1,7 @@
+"""
+This module implements various symbol assignment mechanisms (aka SymbolRetrievers) for Dual Attention Transformer models.
+"""
+
 import torch
 import torch.nn as nn
 from .positional_encoding import RelativePositionalEncoding

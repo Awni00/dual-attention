@@ -1,3 +1,9 @@
+"""
+This module implements the Dual Attention Transformer Language Model (and a standard Transformer Language Model as a baseline).
+
+The DAT-LM uses a "Decoder-only" architecture, causally processing input tokens and predicting the next token in the sequence.
+"""
+
 import torch
 from torch import nn
 from .transformer_blocks import EncoderBlock, create_norm

@@ -1,3 +1,10 @@
+"""
+This module implements Encoder and Decoder blocks for standard Transformer architectures.
+
+Each block consists of:
+Self-attention, (Cross-attention for DecoderBlock), Feed-forward block, LayerNorms/Residuals.
+"""
+
 import torch
 import torch.nn as nn
 from .attention import Attention
