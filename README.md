@@ -1,11 +1,25 @@
 # Dual Attention Transformer
 
-This repository contains the PyPI 
-Python package implementing the Dual Attention Transformer (DAT), as proposed by the paper "Disentangling and Integrating Relational and Sensory Information in Transformer Architectures" by Awni Altabaa, John Lafferty.
+<p align='center'>
+    <a href='https://www.python.org/downloads/release'>
+  	    <img alt="Python 3.10+" src='https://img.shields.io/badge/python-3.10+-blue.svg'/>
+    </a>
+    <a href="https://pypi.org/project/dual-attention/">
+        <img alt="PyPI" src="https://img.shields.io/pypi/v/dual-attention" alt="PyPI version">
+    </a>
+    <a href='https://neurol.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/dual-attention/badge/?version=latest' alt='Documentation Status' />
+    </a>
+    <a href=https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project>
+        <img alt='PR welcome' src='https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?'/>
+    </a>
+    <a href='https://github.com/Awni00/dual-attention/blob/main/LICENSE'>
+        <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dual-attention"/>
+    </a>
+</p>
 
-> **Disentangling and Integrating Relational and Sensory Information in Transformer Architectures**  
-> *Awni Altabaa and John Lafferty*  
-> *arxiv: https://arxiv.org/abs/2405.16727*  
+This repository contains a Python package (hosted on PyPI) implementing the Dual Attention Transformer (DAT), as proposed by the paper [*Disentangling and Integrating Relational and Sensory Information in Transformer Architectures*](https://arxiv.org/abs/2405.16727) by Awni Altabaa, John Lafferty.
+
 > **Abstract.** The Transformer architecture processes sequences by implementing a form of neural message-passing that consists of iterative information retrieval (attention), followed by local processing (position-wise MLP). Two types of information are essential under this general computational paradigm: "sensory" information about individual objects, and "relational" information describing the relationships between objects. Standard attention naturally encodes the former, but does not explicitly encode the latter. In this paper, we present an extension of Transformers where multi-head attention is augmented with two distinct types of attention heads, each routing information of a different type. The first type is the standard attention mechanism of Transformers, which captures object-level features, while the second type is a novel attention mechanism we propose to explicitly capture relational information. The two types of attention heads each possess different inductive biases, giving the resulting architecture greater efficiency and versatility. The promise of this approach is demonstrated empirically across a range of tasks.
 
 ## Installation
@@ -48,11 +62,8 @@ We posit that there are essentially two types of information that are essential 
 
 In this paper, we propose *Relational Attention* as a novel attention mechanism that enables routing of relational information between objects. We then introduce *Dual Attention*, a variant of multi-head attention combining two distinct attention mechanisms: 1) standard Self-Attention for routing sensory information, and 2) Relational Attention for routing relational information. This in turn defines an extension of the Transformer architecture with an explicit ability to reason over both types of information.
 
-## Outline of Codebase
+## Outline of Main Modules
 
-Here, we briefly describe the most important components of the codebase.
-
-**Model Implementation**
 - `relational_attention.py`: This module implements *Relational Attention*, an attention mechanism for routing relational information between objects.
 - `symbol_retrieval.py`: This module implements different *symbol assignment mechanisms* used in *relational attention*, including *symbolic attention*, *positional symbols*, and *position-relative symbols*.
 - `dual_attention.py`: This module implements *Dual Attention*, a variant of multi-head attention combining two distinct attention mechanisms: standard Self-Attention for routing sensory information and Relational Attention for routing relational information.
@@ -61,24 +72,16 @@ Here, we briefly describe the most important components of the codebase.
 - `language_models.py`: This module implements a *Dual Attention Transformer* language model (as well as a standard Transformer language model as a baseline).
 - `seq2seq_models.py`: This module implements a seq2seq encoder-decoder *Dual Attention Transformer*.
 - `vision_models.py`: This module implements a *Vision Dual Attention Transformer* model, in the style of a Vision Transformer (i.e., image is split up into patches and fed to an encoder).
-- `dual_attention_transformer.py`: This is a single-file implementation of everything you need to experiment with the dual-attention Transformer. This is generated for convenience so you can just copy a single file rather than needing to clone the entire repo.
 
-**Experiments**
-- `experiments/relational_games`: This subdirectory includes code associated with the "Relational Games" experiments in the paper, evaluating visual relational reasoning.
-- `experiments/math`: This subdirectory includes code associated with the "Mathematical Problem-Solving" experiments in the paper.
-- `experiments/tiny_stories`: This subdirectory includes code associated with the Language Modeling experiments in the paper, which use the "Tiny Stories" dataset.
-- `experiments/vision`: This subdirectory includes code associated with the Vision experiments in the paper, evaluating image recognition on the ImageNet dataset.
-
-Please see the `readme.md` files in each subdirectory for instructions on reproducing the experimental results in the paper and for links to an online portal with the experimental logs.
 
 ## Usage Examples
 
-Everything in this repo is implemented in PyTorch as `nn.Module` objects. Thus, the implemented modules are compatible with typical PyTorch workflows, training code, and packages like PyTorch Lightning/torchinfo/etc.
+All layers and models are implemented in PyTorch as `nn.Module` objects. Thus, the implemented modules are compatible with typical PyTorch workflows, training code, and packages like PyTorch Lightning/torchinfo/etc.
 
 The following code demonstrates the creation of a *Dual Attention Transformer* Language Model.
 
 ```python
-from language_models import DualAttnTransformerLM
+from dual_attention.language_models import DualAttnTransformerLM
 
 dat_lm = DualAttnTransformerLM(
     vocab_size=32_000,    # vocabulary size
@@ -105,7 +108,7 @@ logits # shape: (1, 128, 32000)
 The following code demos the creation of a *Vision Dual Attention Transformer* model.
 
 ```python
-from vision_models import VisionDualAttnTransformer
+from dual_attention.vision_models import VisionDualAttnTransformer
 
 img_shape = (3, 224, 224)
 patch_size = (16, 16)
@@ -134,8 +137,6 @@ img = torch.randn(1, *img_shape)
 logits = dat_vision(img)
 logits.shape # shape: (1, 1000)
 ```
-
-More demos are available in the `module_demo_notebooks/` subdirectory.
 
 If you have questions, feel free to file an issue or send an email.
 
