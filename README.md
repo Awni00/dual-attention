@@ -7,8 +7,8 @@
     <a href="https://pypi.org/project/dual-attention/">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/dual-attention" alt="PyPI version">
     </a>
-    <a href='https://neurol.readthedocs.io/en/latest/?badge=latest'>
-        <img src='https://readthedocs.org/projects/dual-attention/badge/?version=latest' alt='Documentation Status' />
+    <a href='https://dual-attention-transformer.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/dual-attention-transformer/badge/?version=latest' alt='Documentation Status' />
     </a>
     <a href=https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project>
         <img alt='PR welcome' src='https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?'/>
