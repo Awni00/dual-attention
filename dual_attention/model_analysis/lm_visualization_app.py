@@ -5,7 +5,7 @@ You will be prompted to load a model checkpoint from Huggingface Hub, and then y
 
 To run the app, simply run:
 ```bash
-python -m dual_attention.visualization.lm_visualization_app
+python -m dual_attention.model_analysis.lm_visualization_app
 ```
 """
 
