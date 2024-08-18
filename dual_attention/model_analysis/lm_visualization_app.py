@@ -66,7 +66,7 @@ def load_model(selected_model_path, progress=gr.Progress(track_tqdm=True)):
         return load_status, load_button, run_forward_button, head_selection
     except Exception as e:
         load_status = f"Failed to load model '{selected_model_path}' 🥲. Error: {str(e)}"
-        return load_status, None, None, None
+        return load_status, gr.update(), gr.update(), gr.update()
 
 def run_forward_pass(prompt_text):
     global intermediate_results, tokenized_text
