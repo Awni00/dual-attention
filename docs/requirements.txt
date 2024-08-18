@@ -57,3 +57,4 @@ einops==0.7.0 # used in implementation of dual attention / relational attention
 huggingface-hub==0.23.4 # for loading pre-trained checkpoints
 bertviz==1.4.0 # for visualization
 tiktoken==0.5.2 # tokenizer used for LM experiments
+gradio==4.40.0 # for inference/visualization apps
