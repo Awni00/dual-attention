@@ -1,9 +1,6 @@
 dual\_attention package
 =======================
 
-Submodules
-----------
-
 dual\_attention.attention module
 --------------------------------
 
@@ -108,10 +105,20 @@ dual\_attention.vision\_models module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+dual\_attention.model_analysis.datlm_utils module
+-------------------------------------------------
 
-.. automodule:: dual_attention
+.. automodule:: dual_attention.model_analysis.datlm_utils
    :members:
    :undoc-members:
    :show-inheritance:
+
+dual\_attention.model_analysis.lm_inference_app module
+------------------------------------------------------
+
+.. automodule:: dual_attention.model_analysis.lm_inference_app
+
+dual\_attention.model_analysis.lm_visualization_app module
+----------------------------------------------------------
+
+.. automodule:: dual_attention.model_analysis.lm_visualization_app
