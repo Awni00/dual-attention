@@ -14,7 +14,10 @@ To run the app, simply run:
 import torch
 import tiktoken
 from tqdm import tqdm
-import gradio as gr
+try:
+    import gradio as gr
+except ImportError:
+    raise ImportError("Please install gradio to use this script")
 import tempfile
 from pathlib import Path
 
