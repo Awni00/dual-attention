@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dual_attention", # module name
-    version="0.0.1", # version for this release
+    version="0.0.2", # version for this release
 
     # author information
     author="Awni Altabaa",
@@ -19,14 +19,18 @@ setuptools.setup(
 
     # project url
     project_urls={
-        # 'Documentation': 'https://dual_attention.readthedocs.io/',
+        'Documentation': 'https://dual-attention-transformer.readthedocs.io/',
         'Source':'https://github.com/Awni00/dual-attention',
         'Tracker':'https://github.com/Awni00/dual-attention/issues'},
 
     packages=setuptools.find_packages(),
 
     install_requires=[
+        'einops'
        ],
+    extra_require={
+        'all': ['tiktoken', 'huggingface_hub', 'safetensors']
+    },
 
     license="MIT",
 
