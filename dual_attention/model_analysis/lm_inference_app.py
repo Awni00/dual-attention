@@ -14,6 +14,8 @@ To run the app, simply run:
 import torch
 import tiktoken
 from tqdm import tqdm
+from huggingface_hub import HfApi
+import psutil
 try:
     import gradio as gr
 except ImportError:
@@ -21,13 +23,10 @@ except ImportError:
 
 from ..hf import DualAttnTransformerLM_HFHub
 
+api = HfApi()
+models = api.list_models(author='awni00', search='DAT')
+models = [model.modelId for model in models] # list of models I have uploaded to the Hugging Face Hub
 
-# A dictionary of available models
-models = [
-    "awni00/DAT-sa8-ra8-ns1024-sh8-nkvh4-343M",
-]
-
-# Global variables to store the loaded model and tokenizer
 loaded_model = None
 tokenizer = tiktoken.get_encoding("gpt2") # TODO: in the future, different models may use different tokenizers
 is_model_loaded = False
@@ -39,9 +38,13 @@ def load_model(selected_model_path):
     try:
         loaded_model = DualAttnTransformerLM_HFHub.from_pretrained(selected_model_path).to(device)
         is_model_loaded = True
-        return f"Model `{selected_model_path}` loaded successfully. 😁"
+        model_status = f"Model `{selected_model_path}` loaded successfully. 😁"
+        load_button = gr.update(visible=False)
+        return model_status, load_button
     except Exception as e:
-        return f"Failed to load model '{selected_model_path}' 🥲. Error: {str(e)}"
+        model_status = f"Failed to load model '{selected_model_path}' 🥲. Error: {str(e)}"
+        load_button = gr.update()
+        return model_status, load_button
 
 
 @torch.no_grad()
@@ -90,7 +93,7 @@ def generate(
 
     return idx
 
-def generate_text(prompt_text, max_new_tokens, temperature, top_k):
+def generate_text(prompt_text, max_new_tokens, temperature, top_k, progress=gr.Progress(track_tqdm=True)):
     if not is_model_loaded:
         return "Please load a model first."
 
@@ -114,36 +117,32 @@ def print_machine_info():
     print(f"Total Memory: {total_memory:.2f} GB")
 
 def run_app(share=True):
-    # Gradio Interface
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
         gr.Markdown("# Dual Attention Language Model Inference App")
 
         with gr.Row():
             with gr.Column():
-                # Left column: Model selection and input controls
                 model_dropdown = gr.Dropdown(label="Select Model", choices=models, info="Path to model on Hugging Face Hub", allow_custom_value=True)
-                model_status = gr.Markdown(label="Model Status", value="No model loaded yet.")
+                model_status = gr.Markdown(label="Model Status",
+                    value="No model loaded yet. Please enter a path to a model on HF Hub above and click \"Load Model\". "
+                    "Note that loading a model may take a while since it involves downloading model weights.")
 
                 load_button = gr.Button("Load Model")
+                model_dropdown.change(lambda: gr.update(visible=True), outputs=[load_button])
 
-                # Text prompt input
                 text_prompt = gr.Textbox(label="Input Prompt", placeholder="Enter your prompt here...", lines=5)
 
-                # Inputs for temperature, top-k, and number of tokens to generate
                 temperature_input = gr.Slider(0.01, 1.0, label="Temperature", value=0.95)
                 top_k_input = gr.Number(label="Top-K", value=50, precision=0)
                 num_tokens_input = gr.Number(label="Number of tokens to generate", value=100, precision=0)
 
-                # Generate button
                 generate_button = gr.Button("Generate")
 
             with gr.Column():
-                # Right column: Generated output
                 output_text = gr.Textbox(label="Generated Text", interactive=False, lines=20,
                     placeholder="Generated text will appear here...", show_copy_button=True)
 
-        # Function bindings
-        load_button.click(load_model, inputs=[model_dropdown], outputs=model_status)
+        load_button.click(load_model, inputs=[model_dropdown], outputs=[model_status, load_button])
         generate_button.click(generate_text, inputs=[text_prompt, num_tokens_input, temperature_input, top_k_input], outputs=output_text)
 
     # Launch the app
