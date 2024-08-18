@@ -14,6 +14,8 @@ To run the app, simply run:
 import torch
 import tiktoken
 from tqdm import tqdm
+import psutil
+
 try:
     import gradio as gr
 except ImportError:
@@ -111,6 +113,17 @@ def serve_html(viz_type, view_type):
 def create_download_link(file_path):
     return f"<a href='file://{file_path}' target='_blank'>Click here to view the generated HTML</a>"
 
+def print_machine_info():
+    cuda_available = torch.cuda.is_available()
+    gpu_name = torch.cuda.get_device_name(0) if cuda_available else "No GPU available"
+    num_cpus = psutil.cpu_count()
+    memory_info = psutil.virtual_memory()
+    total_memory = memory_info.total / (1024 ** 3)  # Convert bytes to GB
+
+    print(f"CUDA Available: {cuda_available}")
+    print(f"GPU: {gpu_name}")
+    print(f"Number of CPUs: {num_cpus}")
+    print(f"Total Memory: {total_memory:.2f} GB")
 
 # Function to return HTML for Gradio app
 # def serve_html(text_prompt):
@@ -157,4 +170,5 @@ def run_app(share=True):
     demo.launch(share=share)
 
 if __name__ == '__main__':
+    print_machine_info()
     run_app()

@@ -101,6 +101,18 @@ def generate_text(prompt_text, max_new_tokens, temperature, top_k):
     generated_tokens = generate(loaded_model, prompt_tokens, max_new_tokens=max_new_tokens, temperature=temperature, top_k=top_k, use_tqdm=True)
     return tokenizer.decode(generated_tokens[0].cpu().numpy())
 
+def print_machine_info():
+    cuda_available = torch.cuda.is_available()
+    gpu_name = torch.cuda.get_device_name(0) if cuda_available else "No GPU available"
+    num_cpus = psutil.cpu_count()
+    memory_info = psutil.virtual_memory()
+    total_memory = memory_info.total / (1024 ** 3)  # Convert bytes to GB
+
+    print(f"CUDA Available: {cuda_available}")
+    print(f"GPU: {gpu_name}")
+    print(f"Number of CPUs: {num_cpus}")
+    print(f"Total Memory: {total_memory:.2f} GB")
+
 def run_app(share=True):
     # Gradio Interface
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
@@ -138,4 +150,5 @@ def run_app(share=True):
     demo.launch(share=share)
 
 if __name__ == '__main__':
+    print_machine_info()
     run_app()
