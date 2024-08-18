@@ -4,9 +4,11 @@ This module implements a graphical user interface for generating visualizations 
 You will be prompted to load a model checkpoint from Huggingface Hub, and then you can input a text prompt to generate different visualizations.
 
 To run the app, simply run:
-```bash
-python -m dual_attention.model_analysis.lm_visualization_app
-```
+
+.. code-block::
+
+    python -m dual_attention.model_analysis.lm_visualization_app
+
 """
 
 import torch
@@ -111,7 +113,7 @@ def create_download_link(file_path):
 # def serve_html(text_prompt):
 #     return generate_visualization(text_prompt)
 
-if __name__ == '__main__':
+def run_app(share=True):
     # Gradio Interface
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
         gr.Markdown("# DAT-LM Visualization App")
@@ -149,4 +151,7 @@ if __name__ == '__main__':
         generate_button.click(generate_link, inputs=[viz_type, view_type], outputs=html_output)
 
     # Launch the app
-    demo.launch(share=True)
+    demo.launch(share=share)
+
+if __name__ == '__main__':
+    run_app()

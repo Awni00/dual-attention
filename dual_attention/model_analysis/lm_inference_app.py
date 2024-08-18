@@ -4,9 +4,11 @@ This module implements a graphical user interface for generating text using a Du
 You will be prompted to load a model checkpoint from Huggingface Hub, and then you can input a text prompt to generate text.
 
 To run the app, simply run:
-```bash
-python -m dual_attention.model_analysis.lm_inference_app
-```
+
+.. code-block::
+
+    python -m dual_attention.model_analysis.lm_inference_app
+
 """
 
 import torch
@@ -24,7 +26,7 @@ models = [
 
 # Global variables to store the loaded model and tokenizer
 loaded_model = None
-tokenizer = tiktoken.get_encoding("gpt2") # TODO: in the future, different models may require different tokenizers
+tokenizer = tiktoken.get_encoding("gpt2") # TODO: in the future, different models may use different tokenizers
 is_model_loaded = False
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -96,8 +98,7 @@ def generate_text(prompt_text, max_new_tokens, temperature, top_k):
     generated_tokens = generate(loaded_model, prompt_tokens, max_new_tokens=max_new_tokens, temperature=temperature, top_k=top_k, use_tqdm=True)
     return tokenizer.decode(generated_tokens[0].cpu().numpy())
 
-if __name__ == '__main__':
-
+def run_app(share=True):
     # Gradio Interface
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
         gr.Markdown("# Dual Attention Language Model Inference App")
@@ -131,4 +132,7 @@ if __name__ == '__main__':
         generate_button.click(generate_text, inputs=[text_prompt, num_tokens_input, temperature_input, top_k_input], outputs=output_text)
 
     # Launch the app
-    demo.launch(share=True)
+    demo.launch(share=share)
+
+if __name__ == '__main__':
+    run_app()
