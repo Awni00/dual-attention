@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 project = 'Dual Attention'
 copyright = '2024, Awni Altabaa'
 author = 'Awni Altabaa'
-release = '0.0.1'
+release = '0.0.4'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
