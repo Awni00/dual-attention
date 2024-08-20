@@ -13,6 +13,9 @@
     <a href=https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project>
         <img alt='PR welcome' src='https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?'/>
     </a>
+    <a href=https://arxiv.org/abs/2405.16727>
+        <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-paper-brown?logo=arxiv">
+    </a>
     <a href='https://github.com/Awni00/dual-attention/blob/main/LICENSE'>
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dual-attention"/>
     </a>
