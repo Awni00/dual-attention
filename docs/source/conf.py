@@ -9,7 +9,7 @@
 import sys, os
 sys.path.insert(0, os.path.abspath('../..'))
 
-project = 'Dual Attention'
+project = 'dual-attention'
 copyright = '2024, Awni Altabaa'
 author = 'Awni Altabaa'
 release = '0.0.4'
@@ -17,7 +17,7 @@ release = '0.0.4'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'myst_parser', 'sphinx.ext.mathjax']
+extensions = ['sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'myst_parser', 'sphinx.ext.mathjax', 'sphinx_copybutton']
 # 'sphinx.ext.todo', 
 
 templates_path = ['_templates']
@@ -29,9 +29,9 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 # html_theme = 'alabaster'
-# html_theme = 'sphinx_book_theme'
+html_theme = 'sphinx_book_theme'
 # html_theme = 'sphinx_rtd_theme'
-html_theme = 'pydata_sphinx_theme'
+# html_theme = 'pydata_sphinx_theme'
 html_static_path = ['_static']
 
 html_permalinks_icon = '§'
