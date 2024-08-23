@@ -1,124 +1,124 @@
-dual\_attention package
-=======================
+``dual_attention`` Package Reference
+====================================
 
-dual\_attention.attention module
---------------------------------
+``dual_attention.attention`` module
+-----------------------------------
 
 .. automodule:: dual_attention.attention
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.attention\_utils module
----------------------------------------
+``dual_attention.attention_utils`` module
+-----------------------------------------
 
 .. automodule:: dual_attention.attention_utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.dual\_attention module
---------------------------------------
+``dual_attention.dual_attention`` module
+----------------------------------------
 
 .. automodule:: dual_attention.dual_attention
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.dual\_attn\_blocks module
------------------------------------------
+``dual_attention.dual_attn_blocks`` module
+------------------------------------------
 
 .. automodule:: dual_attention.dual_attn_blocks
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.hf module
--------------------------
+``dual_attention.hf`` module
+----------------------------
 
 .. automodule:: dual_attention.hf
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.language\_models module
----------------------------------------
+``dual_attention.language_models`` module
+-----------------------------------------
 
 .. automodule:: dual_attention.language_models
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.model\_utils module
------------------------------------
+``dual_attention.model_utils`` module
+-------------------------------------
 
 .. automodule:: dual_attention.model_utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.positional\_encoding module
--------------------------------------------
+``dual_attention.positional_encoding`` module
+---------------------------------------------
 
 .. automodule:: dual_attention.positional_encoding
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.relational\_attention module
---------------------------------------------
+``dual_attention.relational_attention`` module
+----------------------------------------------
 
 .. automodule:: dual_attention.relational_attention
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.seq2seq\_models module
---------------------------------------
+``dual_attention.seq2seq_models`` module
+----------------------------------------
 
 .. automodule:: dual_attention.seq2seq_models
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.symbol\_retrieval module
-----------------------------------------
+``dual_attention.symbol_retrieval`` module
+------------------------------------------
 
 .. automodule:: dual_attention.symbol_retrieval
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.transformer\_blocks module
-------------------------------------------
+``dual_attention.transformer_blocks`` module
+--------------------------------------------
 
 .. automodule:: dual_attention.transformer_blocks
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.vision\_models module
--------------------------------------
+``dual_attention.vision_models`` module
+---------------------------------------
 
 .. automodule:: dual_attention.vision_models
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.model_analysis.datlm_utils module
--------------------------------------------------
+``dual_attention.model_analysis.datlm_utils`` module
+----------------------------------------------------
 
 .. automodule:: dual_attention.model_analysis.datlm_utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-dual\_attention.model_analysis.lm_inference_app module
-------------------------------------------------------
+``dual_attention.model_analysis.lm_inference_app`` module
+---------------------------------------------------------
 
 .. automodule:: dual_attention.model_analysis.lm_inference_app
 
-dual\_attention.model_analysis.lm_visualization_app module
-----------------------------------------------------------
+``dual_attention.model_analysis.lm_visualization_app`` module
+-------------------------------------------------------------
 
 .. automodule:: dual_attention.model_analysis.lm_visualization_app
