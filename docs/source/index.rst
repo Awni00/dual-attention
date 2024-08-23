@@ -1,5 +1,5 @@
-Dual Attention Transformer and ``dual-attention`` Python Package
-================================================================
+``dual-attention`` Python Package: Dual Attention Transformers
+=================================================================
 .. raw:: html
 
    <p align='center'>
