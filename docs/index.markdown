@@ -5,6 +5,14 @@
 layout: home
 ---
 <head>
+<link rel="apple-touch-icon" sizes="180x180" href="{{site.baseurl}}/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{site.baseurl}}/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{site.baseurl}}/favicon-16x16.png">
+<link rel="manifest" href="{{site.baseurl}}/site.webmanifest">
+<link rel="mask-icon" href="{{site.baseurl}}/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -22,7 +30,7 @@ layout: home
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="{{site.url}}/favicon/favicon.ico">
 
 <style>
 .material-symbols-outlined {
@@ -50,10 +58,11 @@ layout: home
 
 #markdown-toc {
     border: 1px solid #aaa;
+    border-radius: 10px; /* Add border radius */
     padding: 1.5em;
     list-style: decimal;
     display: inline-block;
-    width: 60%;
+    width: 80%;
     /* margin: auto; */
 }
 </style>
@@ -127,7 +136,7 @@ Yale University
     <!-- <span class="icon"><i class="fas fa-book"></i></span> -->
     <span>&nbsp;Docs&nbsp;</span>
     </a>
-    <a href="https://dual-attention-transformer.readthedocs.io/en/latest/" class="btn" target="_blank">
+    <a href="https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489" class="btn" target="_blank">
     🤗 &nbsp;HF Collection&nbsp;
     </a>
     <a href="https://wandb.ai/dual-attention/projects" class="btn" target="_blank">
