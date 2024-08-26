@@ -21,7 +21,8 @@ layout: home
 <!-- css for buttons -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon/favicon.ico">
 
 <style>
 .material-symbols-outlined {
@@ -52,6 +53,8 @@ layout: home
     padding: 1.5em;
     list-style: decimal;
     display: inline-block;
+    width: 60%;
+    /* margin: auto; */
 }
 </style>
 
@@ -134,13 +137,12 @@ Yale University
 
 <br>
 
-* Do not remove this line (it will not be displayed)
-{:toc}
-
 <figure style="text-align: center;">
     <img src="figs/paper_main_figure.png" alt="A depiction of self-attention and relational attention">
 </figure>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
 
 # Abstract
 
