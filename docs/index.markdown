@@ -188,7 +188,7 @@ To develop a model that supports both fundamental types of information (sensory 
 We empirically evaluate the Dual Attention Transformer (*DAT*) architecture on a range of tasks covering different domains and modalities, comparing against a standard Transformer with a matching total number of attention heads. We give a preview of our experimental results below. Note that these plots are interactive; the sliders at the bottom of the plots expose results across different tasks or configurations.
 
 <!-- **Data-efficient Relational Reasoning: Relational Games.** ... -->
-## Data-efficient Relational Reasoning: Relational Games
+## Relational Reasoning
 
 The first set of experiments evaluates the data-efficiency of *DAT* on visual relational reasoning tasks. We consider the "Relational Games" benchmark which is used for evaluating relational architectures. The learning curves depicted in the plot below show that *DAT* is significantly more data-efficient compared to a Transformer in learning relational tasks.
 
@@ -204,7 +204,7 @@ The first set of experiments evaluates the data-efficiency of *DAT* on visual re
         };                            </script>
 </div>
 
-## Improved Symbolic Reasoning in Sequence-to-Sequence tasks: Mathematical Problem-Solving
+## Mathematical Problem-Solving
 <!-- ***Improved Symbolic Reasoning in Sequence-to-Sequence tasks: Mathematical Problem-Solving.*** -->
 To probe *DAT*'s abilities in symbolic reasoning in sequence-to-sequence tasks, we evaluate it on a mathematical problem-solving benchmark. The training curves below show that *DAT* learns faster and reaches higher accuracy compared to a Transformer of the same size.
 
@@ -219,9 +219,10 @@ To probe *DAT*'s abilities in symbolic reasoning in sequence-to-sequence tasks, 
             })
         };                            </script>
 </div>
-## Improvements in Language Modeling
 
-Language modeling is an important sequence modeling task that has enabled remarkable applications through modern large language models. We begin to evaluate *DAT*'s language modeling abilities through the "Tiny Stories" benchmark for small language models. We find that the relational inductive biases of *DAT* yield modest improvements in language modeling.
+## Language Modeling
+
+Language modeling is an important sequence modeling task that has enabled remarkable applications through modern large language models. We evaluate the usefulness of the relational computational mechanisms of *DAT* in language modeling, observing some improvements over standard Transformers. By [visualizing the internal relational representations](https://huggingface.co/spaces/awni00/DAT-LM-Visualization) of trained *DAT* language models, we find evidence that they encode human-interpretable semantic relations.
 
 <!-- LANGUAGE MODELING HTML PLOT
 <div>
@@ -261,41 +262,15 @@ Language modeling is an important sequence modeling task that has enabled remark
 <details>
     <summary>Visualization of Internal Representations</summary>
     <iframe
-    src="https://awni00-dat-lm-inference.hf.space"
+    src="https://huggingface.co/spaces/awni00/DAT-LM-Visualization"
     frameborder="0"
     width="100%"
     height="600"
     ></iframe>
 </details> -->
 
-<!-- <button class="collapsible">Visualization of Internal Representations</button>
-<div class="content">
-<iframe
-    src="https://awni00-dat-lm-visualization.hf.space"
-    frameborder="0"
-    width="100%"
-    height="600"
-></iframe>
-</div> -->
 
-<!-- <script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
-</script> -->
-
-## The Benefits of Relational Inductive Biases in Vision: Image Recognition with ImageNet
+## Image Recognition
 
 Finally, we return to evaluating *DAT* on a vision task ---object classification with the ImageNet dataset. We use a Vision Transformer-style architecture where the input image is divided into patches that are flattened and transformed into a sequence of embeddings. We find that *DAT* learns significantly faster and reaches higher accuracy compared to a standard Vision Transformer.
 
@@ -330,20 +305,6 @@ fetch('figs/imagenet_training_curves.json')
 - **[Huggingface Collection.](https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489)** This is a collection of model checkpoints and apps associated with the Dual Attention Transformer. In particular, language models trained on the Fineweb dataset can be directly loaded from Huggingface through the `dual-attention` package ([see documentation](https://dual-attention-transformer.readthedocs.io/en/latest/model_classes.html#loading-pre-trained-models-from-hugging-face)). In addition, we also created apps for explore trained *DAT* language models:
     - [Run inference with *DAT* language models](https://huggingface.co/spaces/awni00/DAT-LM-Inference)
     - [Visualize the internal representations of *DAT* language models](https://huggingface.co/spaces/awni00/DAT-LM-Visualization)
-
-<!-- **Pretrained model checkpoints.** -->
-<!-- 
-# Reproducibility
-
-
-Our [code](https://github.com/Awni00/abstract_transformer/) is publicly available and contains detailed instructions for reproducing our experimental results. We also share complete experimental logs for the experiments reported in the paper through the W&B online portal to promote transparency and reproducibility. For each experimental run, this includes the git commit ID associated with the version of the code that was used to run the experiment, the script and command line arguments associated with the experimental run, the hardware used for that run, and metrics tracked over the course of training.
-
-| Experiment | Links    |
-|------------|----------|
-| Relational Games   | [code](https://github.com/Awni00/abstract_transformer/tree/main/experiments/relational_games) / [logs](https://wandb.ai/awni00/dual_attention--relational_games_learning_curves)|
-| Mathematical Problem-Solving   |  [code](https://github.com/Awni00/abstract_transformer/tree/main/experiments/math) / logs ([1](https://wandb.ai/awni00/dual_attention--math--calculus__differentiate), [2](https://wandb.ai/awni00/dual_attention--math--algebra__sequence_next_term), [3](https://wandb.ai/awni00/dual_attention--math--algebra__linear_1), [4](https://wandb.ai/awni00/dual_attention--math--polynomials__expand), [5](https://wandb.ai/awni00/dual_attention--math--polynomials__add)) |
-| Language Modeling | [code](https://github.com/Awni00/abstract_transformer/tree/main/experiments/tiny_stories) / [logs](https://wandb.ai/awni00/dual_attention--tiny_stories-LM) |
-| Image Recognition | [code](https://github.com/Awni00/abstract_transformer/tree/main/experiments/vision) / [logs](https://wandb.ai/awni00/dual_attention--Vision-IMAGENET) | -->
 
 
 # Citation
