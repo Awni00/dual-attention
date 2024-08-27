@@ -1,20 +1,23 @@
 # Dual Attention Transformer
 
 <p align='center'>
-    <a href='https://www.python.org/downloads/release'>
-  	    <img alt="Python 3.10+" src='https://img.shields.io/badge/python-3.10+-blue.svg'/>
+    <a href=https://arxiv.org/abs/2405.16727>
+        <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-paper-brown?logo=arxiv">
     </a>
+    <a href=https://awni.xyz/dual-attention>
+        <img alt="Project Webpage" src="https://img.shields.io/badge/www-website-royalblue">
+    </a>
+    <!-- <a href='https://www.python.org/downloads/release'>
+  	    <img alt="Python 3.10+" src='https://img.shields.io/badge/python-3.10+-royalblue.svg'/>
+    </a> -->
     <a href="https://pypi.org/project/dual-attention/">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/dual-attention" alt="PyPI version">
     </a>
     <a href='https://dual-attention-transformer.readthedocs.io/en/latest/?badge=latest'>
         <img src='https://readthedocs.org/projects/dual-attention-transformer/badge/?version=latest' alt='Documentation Status' />
     </a>
-    <a href=https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project>
+    <a href=https://dual-attention-transformer.readthedocs.io/en/latest/troubleshooting-contributing.html#contributing>
         <img alt='PR welcome' src='https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?'/>
-    </a>
-    <a href=https://arxiv.org/abs/2405.16727>
-        <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-paper-brown?logo=arxiv">
     </a>
     <a href='https://github.com/Awni00/dual-attention/blob/main/LICENSE'>
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dual-attention"/>
@@ -24,6 +27,8 @@
 This repository contains a Python package (hosted on PyPI) implementing the Dual Attention Transformer (DAT), as proposed by the paper [*Disentangling and Integrating Relational and Sensory Information in Transformer Architectures*](https://arxiv.org/abs/2405.16727) by Awni Altabaa, John Lafferty.
 
 > **Abstract.** The Transformer architecture processes sequences by implementing a form of neural message-passing that consists of iterative information retrieval (attention), followed by local processing (position-wise MLP). Two types of information are essential under this general computational paradigm: "sensory" information about individual objects, and "relational" information describing the relationships between objects. Standard attention naturally encodes the former, but does not explicitly encode the latter. In this paper, we present an extension of Transformers where multi-head attention is augmented with two distinct types of attention heads, each routing information of a different type. The first type is the standard attention mechanism of Transformers, which captures object-level features, while the second type is a novel attention mechanism we propose to explicitly capture relational information. The two types of attention heads each possess different inductive biases, giving the resulting architecture greater efficiency and versatility. The promise of this approach is demonstrated empirically across a range of tasks.
+
+Please see the [project webpage](awni.xyz/dual-attention) for an overview of the paper and its main results.
 
 ## Installation
 
