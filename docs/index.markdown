@@ -44,7 +44,7 @@ layout: home
 </style>
 
 
-<!-- TOC Stylee -->
+<!-- TOC Style -->
 <style>
 #markdown-toc::before {
     content: "Contents";
@@ -314,7 +314,7 @@ fetch('figs/imagenet_training_curves.json')
 
 - **[Experimental Logs.](https://wandb.ai/dual-attention/projects){:target="_blank"}** This online portal provides full experimental logs through the W&B experiment tracking tool. For each experimental run, this includes the git commit ID associated with the version of the code that was used to run the experiment, the script and command line arguments associated with the experimental run, the hardware used for that run, and metrics tracked over the course of training.
 
-- **[Huggingface Collection.](https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489){:target="_blank"}** This is a collection of model checkpoints and apps associated with the Dual Attention Transformer. In particular, language models trained on the Fineweb dataset can be directly loaded from Huggingface through the `dual-attention` package ([see documentation](https://dual-attention-transformer.readthedocs.io/en/latest/model_classes.html#loading-pre-trained-models-from-hugging-face){:target="_blank"}). In addition, we also created apps for explore trained *DAT* language models:
+- **[Huggingface Collection.](https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489){:target="_blank"}** This is a collection of model checkpoints and apps associated with the Dual Attention Transformer. In particular, language models trained on the Fineweb dataset can be directly loaded from Huggingface through the `dual-attention` package ([see documentation](https://dual-attention-transformer.readthedocs.io/en/latest/model_classes.html#loading-pre-trained-models-from-hugging-face){:target="_blank"}). In addition, we also created apps for exploring trained *DAT* language models:
     - [Run inference with *DAT* language models](https://huggingface.co/spaces/awni00/DAT-LM-Inference){:target="_blank"}
     - [Visualize the internal representations of *DAT* language models](https://huggingface.co/spaces/awni00/DAT-LM-Visualization){:target="_blank"}
 
