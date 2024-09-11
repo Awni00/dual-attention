@@ -75,7 +75,7 @@ class RelationalAttention(nn.Module):
         rel_activation : str, optional
             name of activation function applied to relations. By default 'identity'.
         rel_proj_dim : int, optional
-            dimension of relation projections. If None, rel_proj_dim = d_model // n_relations. By default None.
+            dimension of relation projections. If None, rel_proj_dim = head_dim * n_heads // n_relations. By default None.
         add_bias_kv : bool, optional
             whether to use bias in key/value projections, by default False
         add_bias_out : bool, optional
@@ -104,7 +104,7 @@ class RelationalAttention(nn.Module):
         self.head_dim = self.d_model // self.total_n_heads # dim of projections
         self.n_rep_kv = self.n_heads // self.n_kv_heads # use same kv heads for several query heads
         self.key_dim = key_dim if key_dim is not None else self.head_dim # key dimension
-        self.rel_proj_dim = rel_proj_dim if rel_proj_dim is not None else self.head_dim # dimension of relation projections
+        self.rel_proj_dim = rel_proj_dim if rel_proj_dim is not None else (self.head_dim * self.n_heads) // n_relations # dimension of relation projections
 
         # make relative size of parameters and dimensions makes sense
         assert self.n_heads % self.n_kv_heads == 0, f"n_heads={self.n_heads}, n_kv_heads = {self.n_kv_heads}"
