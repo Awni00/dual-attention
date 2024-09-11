@@ -38,7 +38,7 @@ The ``RelationalAttention`` class in the ``dual_attention.relational_attention``
         total_n_heads=None,        # total number of heads of DualAttn (if used within DualAttn)
         symmetric_rels=False,      # whether relations should be constrained to be symmetric
         use_relative_positional_symbols=False # whether to use relative positional symbols
-
+        )
     x = torch.randn(1, 10, 64)
     s = torch.randn(1, 10, 64)
     out, *_ = relational_attn(x, s)
