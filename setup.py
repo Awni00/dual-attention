@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dual_attention", # module name
-    version="0.0.5", # version for this release
+    version="0.0.6", # version for this release
 
     # author information
     author="Awni Altabaa",
