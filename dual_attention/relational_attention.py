@@ -104,7 +104,7 @@ class RelationalAttention(nn.Module):
         self.head_dim = self.d_model // self.total_n_heads # dim of projections
         self.n_rep_kv = self.n_heads // self.n_kv_heads # use same kv heads for several query heads
         self.key_dim = key_dim if key_dim is not None else self.head_dim # key dimension
-        self.rel_proj_dim = rel_proj_dim if rel_proj_dim is not None else (self.head_dim * self.n_heads) // n_relations # dimension of relation projections
+        self.rel_proj_dim = rel_proj_dim if rel_proj_dim is not None else (self.head_dim * self.n_heads) // self.n_relations # dimension of relation projections
 
         # make relative size of parameters and dimensions makes sense
         assert self.n_heads % self.n_kv_heads == 0, f"n_heads={self.n_heads}, n_kv_heads = {self.n_kv_heads}"
