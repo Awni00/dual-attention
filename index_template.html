@@ -36,43 +36,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/tex.min.js"></script>
 
-  <!-- For Loading HTML Figure Files -->
-<!-- TODO:  remove -->
-  <!-- <script>
-    function includeHTML() {
-      var z, i, elmnt, file, xhttp;
-      /*loop through a collection of all HTML elements:*/
-      z = document.getElementsByTagName("*");
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        /*search for elements with a certain atrribute:*/
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          /*make an HTTP request using the attribute value as the file name:*/
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-              if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-              /*remove the attribute, and call this function once more:*/
-              elmnt.removeAttribute("w3-include-html");
-              includeHTML();
-            }
-          } 
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          /*exit the function:*/
-          return;
-        }
-      }
-    };
-  </script> -->
-  <script src="library.js"></script>
-
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
-  <script>
+  <!-- <script>
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {
@@ -82,7 +48,7 @@
     gtag('js', new Date());
 
     gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  </script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -147,9 +113,9 @@
           <h1 class="title is-1 publication-title">Disentangling and Integrating <br>Relational and Sensory Information <br>in Transformer Architectures</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://awni.xyz">Awni Altabaa</a>,</span>
+              <a href="https://awni.xyz" target="_blank">Awni Altabaa</a>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?hl=en&user=gRpLHZ4AAAAJ&view_op=list_works&sortby=pubdate">John Lafferty</a></span>
+              <a href="https://scholar.google.com/citations?hl=en&user=gRpLHZ4AAAAJ&view_op=list_works&sortby=pubdate" target="_blank">John Lafferty</a></span>
           </div>
 
           <div class="is-size-5 publication-authors">
@@ -161,7 +127,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2405.16727"
+                <a href="https://arxiv.org/abs/2405.16727" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <!-- <i class="fas fa-file-pdf"></i> -->
@@ -181,7 +147,7 @@
               </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/Awni00/dual-attention"
+                <a href="https://github.com/Awni00/dual-attention" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <!-- <i class="fab fa-github"></i> -->
@@ -190,7 +156,7 @@
                   <span>Code</span>
                   </a>
               </span>
-              <span class="link-block">
+              <span class="link-block" target="_blank">
                 <a href="https://dual-attention-transformer.readthedocs.io/en/latest/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -199,7 +165,7 @@
                   <span>Documentation</span>
                   </a>
               </span>
-              <span class="link-block">
+              <span class="link-block" target==_blank"">
                 <a href="https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -209,7 +175,7 @@
                   <span>Model Weights</span>
                   </a>
               </span>
-              <span class="link-block">
+              <span class="link-block" target="_blank">
                 <a href="https://wandb.ai/dual-attention/projects"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
