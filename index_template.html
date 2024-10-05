@@ -1,0 +1,498 @@
+<!-- Reference: this code is based on the source of this webpage: https://github.com/nerfies/nerfies.github.io -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Attention, Dual Attention, Dual Attention Transformer, Transformer, Relational, Relational Reasoning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dual Attention Transformer: Disentangling and Integrating Relational and Sensory Information in Transformer Architectures</title>
+
+  <!-- MathJax Setup -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <!-- and it's easy to individually load additional languages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/tex.min.js"></script>
+
+  <!-- For Loading HTML Figure Files -->
+<!-- TODO:  remove -->
+  <!-- <script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /*loop through a collection of all HTML elements:*/
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /*make an HTTP request using the attribute value as the file name:*/
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+              if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+              /*remove the attribute, and call this function once more:*/
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          } 
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /*exit the function:*/
+          return;
+        }
+      }
+    };
+  </script> -->
+  <script src="library.js"></script>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://awni.xyz">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Related Projects
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://awni00.github.io/abstractor" target="_blank">
+            Abstractor
+          </a>
+          <a class="navbar-item" href="https://awni00.github.io/relational-convolutions" target="_blank">
+            Relational Convolutions
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Disentangling and Integrating <br>Relational and Sensory Information <br>in Transformer Architectures</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://awni.xyz">Awni Altabaa</a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=gRpLHZ4AAAAJ&view_op=list_works&sortby=pubdate">John Lafferty</a></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Department of Statistics & Data Science <br> Yale University</span>
+            <!-- <span class="author-block"><sup>2</sup>Yale University</span> -->
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2405.16727"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="fas fa-file-pdf"></i> -->
+                      <i class="far fa-file-alt"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Awni00/dual-attention"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="fab fa-github"></i> -->
+                      <i class="fas fa-code"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://dual-attention-transformer.readthedocs.io/en/latest/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fas fa-book"></i>
+                  </span>
+                  <span>Documentation</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="fas fa-flask"></i> -->
+                       🤗
+                  </span>
+                  <span>Model Weights</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://wandb.ai/dual-attention/projects"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-flask"></i>
+                  </span>
+                  <span>W&B Logs</span>
+                  </a>
+              </span>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+
+    </div>
+  </div>
+</section> -->
+
+<!--
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Relational reasoning is a central component of generally intelligent systems, enabling robust and data-efficient inductive generalization. Recent empirical evidence shows that many existing neural architectures, including Transformers, struggle with tasks requiring relational reasoning. In this work, we distinguish between two types of information: sensory information about the properties of individual objects, and relational information about the relationships between objects. While neural attention provides a powerful mechanism for controlling the flow of sensory information between objects, the Transformer lacks an explicit computational mechanism for routing and processing relational information. To address this limitation, we propose an architectural extension of the Transformer framework that we call the Dual Attention Transformer (DAT), featuring two distinct attention mechanisms: sensory attention for directing the flow of sensory information, and a novel relational attention mechanism for directing the flow of relational information. We empirically evaluate DAT on a diverse set of tasks ranging from synthetic relational benchmarks to complex real-world tasks such as language modeling and visual processing. Our results demonstrate that integrating explicit relational computational mechanisms into the Transformer architecture leads to significant performance gains in terms of data efficiency and parameter efficiency.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src=""
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <figure style="text-align: center;">
+            <img src="./static/figs/paper_main_figure.png" alt="Sensory and Relational Attention" class="teaser-image">
+            <figcaption style="text-align: left;">
+              <em> <b>Figure: Sensory and Relational Attention in the Dual Attention Transformer.</b></em> Standard self-attention retrieves sensory information $v_i$ about the attributes of individual objects while relational attention retrieves relational information $r(x, y_i)$ about the relationship between the objects in the context and the receiver. Each relation is tagged with a symbol $s_i$ which acts as an abstract variable identifying the sender. In both cases, information is aggregated according to the attention scores $\alpha_i$, which are computed by a softmax over inner products of queries and keys.
+            </figcaption>
+        </figure>
+        <br>
+
+        <h2 class="title is-3">Summary of Paper</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            The Transformer architecture can be understood as an instantiation of a broader computational paradigm implementing a form of neural message-passing that iterates between two operations: 1) information retrieval (self-attention), and 2) local processing (feedforward block). To process a sequence of objects $x_1, \ldots, x_n$, this general neural message-passing paradigm has the form
+          </p>
+
+          $$
+          \begin{align*}
+          x_i &\gets \mathrm{Aggregate}(x_i, {\{m_{j \to i}\}}_{j=1}^n)\\
+          x_i &\gets \mathrm{Process}(x_i).
+          \end{align*}
+          $$
+
+          <p>
+          In the case of Transformers, the self-attention mechanism can be seen as sending messages from object $j$ to object $i$ that are encodings of the sender's features, with the message from sender $j$ to receiver $i$ given by $m_{j \to i} = \phi_v(x_j)$. These messages are then aggregated according to some selection criterion based on the receiver's features, typically given by the softmax attention scores.
+        </p>
+
+        <p>
+          We posit that there are essentially two types of information that need to be routed between objects under this general computational paradigm for sequence modeling: 1) <em>sensory</em> information describing the features and attributes of individual objects, and 2) <em>relational</em> information about the relationships between objects. The standard attention mechanism of Transformers naturally encodes the former, but does not explicitly encode the latter.
+        </p>
+
+        <p>
+          To capture routing relational information between objects, we propose a novel attention mechanism called <em>relational attention</em>. Under the message-passing lens, in relational attention, the message from object $j$ to object $i$ is $m_{j \to i} = (r(x_i, x_j), s_j)$: the relation between the sender and the receiver $r(x_i, x_j)$ tagged with the identity of the sender $s_j$. The relation $r(x_i, x_j)$ is represented by an inner product of feature maps, capturing a comparison of the two objects' features under different filters. The identity of the sender is encoded by a vector $s_j$ that we call object $j$'s "symbol"---it acts as a pointer to the object, enabling a relation-centric representation that is disentangled from sensory information.
+        </p>
+
+        $$
+        \begin{align*}
+        \mathrm{RelationalAttention}(x, (y_1, \ldots, y_n)) &= \sum_{i=1}^{n} \alpha_i(x, \boldsymbol{y}) \left( r(x, y_i) W_r + s_i W_s \right), \\
+        \alpha(x, \boldsymbol{y}) &= \mathrm{Softmax}\big(\big[\langle \phi_{q, \ell}^{\mathrm{attn}}(x), \phi_{k, \ell}^{\mathrm{attn}}(y_i)\rangle\big]_{i=1}^{n}\big) \in \Delta^n,\\
+        r(x, y) &= \big(\langle \phi_{q, \ell}^{\mathrm{rel}}(x), \phi_{k, \ell}^{\mathrm{rel}}(y)\rangle\big)_{\ell \in [d_r]} \in \mathbb{R}^{d_r},\\
+        (s_1, \ldots, s_n) &= \mathrm{SymbolRetriever}(\boldsymbol{y}; S_{\mathrm{lib}}).
+        \end{align*}
+        $$
+
+        <p>
+          In relational attention, there exists two sets of query/key feature maps. $\phi_{q, \ell}^{\mathrm{attn}}, \phi_{k, \ell}^{\mathrm{attn}}$ are learned feature maps that control the selection criterion for which object(s) in the context to attend to (i.e., they are used to compute the attention scores $\alpha(x, \boldsymbol{y}) \in \Delta^n$). $\phi_{q, \ell}^{\mathrm{attn}}, \phi_{k, \ell}^{\mathrm{attn}}$ are learned feature maps that represent the relationship between pairs of objects through inner product comparisons $\langle \phi_{q, \ell}^{\mathrm{rel}}(x), \phi_{q, \ell}^{\mathrm{rel}}(y)\rangle$. The $\mathrm{SymbolRetriever}$ learns a library of symbols $S_{\mathrm{lib}}$ and assigns a symbol to each object acting as a pointer or identifier. We consider three symbol assignment mechanisms that identify objects via: their absolute position in the sequence, their position relative to the receiver, or an equivalence class over their features.
+        </p>
+        <p>
+          To develop a model that supports both fundamental types of information (sensory and relational), we propose <em>dual attention</em>---a variant of multi-head attention composed of two types of attention heads. Standard self-attention heads handle routing sensory information between objects while relational attention heads handle routing relational information between objects. This gives rise to the <em>Dual Attention Transformer</em>, a versatile sequence model with both sensory and relational inductive biases.
+        </p>
+
+        <figure style="text-align: center;">
+            <img src="./static/figs/dual_attn_alg.png" alt="An algorithmic description of Dual Attention.">
+        </figure>
+
+      </div>
+      </div>
+    </div>
+
+    <!-- Experiments. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Highlights of Experiments</h2>
+
+        <div class="content has-text-justified">
+          <p>We empirically evaluate the Dual Attention Transformer (abbreviated, <em>DAT</em> ) architecture on a range of tasks spanning different domains and modalities, with the goal of assessing the impact of relational computational mechanisms in complex real-world tasks.</p>
+
+          <h3>Relational Reasoning</h3>
+          <p>The first set of experiments evaluates the data-efficiency of <em>DAT</em> on visual relational reasoning tasks. We consider the “Relational Games” benchmark which is used for evaluating relational architectures. The learning curves depicted in the plot below show that <em>DAT</em> is significantly more data-efficient compared to a Transformer in learning relational tasks.</p>
+            {{relfig}}
+          <h3>Mathematical Problem-Solving</h3>
+          <p>Mathematical problem-solving is an interesting test for neural models because it requires more than statistical pattern recognition---it requires inferring laws, axioms, and symbol manipulation rules. To probe <em>DAT</em>’s abilities in symbolic reasoning in sequence-to-sequence tasks, we evaluate it on a mathematical problem-solving benchmark. We find that <em>DAT</em> outperforms standard Transformers consistently across model sizes.</p>
+            {{mathfig}}
+
+          <h3>Visual Processing</h3>
+          <p>In this section, we explore how the relational computational mechanisms introduced into <em>DAT</em>---namely, relational attention---impact visual processing tasks. We evaluate a <em>ViT</em>-style <em>DAT</em> architecture (<em>ViDAT</em>), and compare it against a standard <em>ViT</em> on the CIFAR image recognition benchmarks. We find that the <em>ViDAT</em> architecture outperforms the standard <em>ViT</em> architecture across both datasets, suggesting that the relational computational mechanisms confer benefits in visual processing.</p>
+            {{visfig}}
+
+          <h3>Language Modeling</h3>
+          <p>Language understanding involves processing and organizing relational information, such as syntactic structures, semantic roles, and contextual dependencies, to extract meaning from words and their connections within sentences. We evaluate the impact of the relational computational mechanisms of <em>DAT</em> in language modeling, training models upto 1.3B parameters in size. We observe improvements in data efficiency and parameter efficiency compared to standard Transformers. By 
+          <!-- <a href="https://huggingface.co/spaces/awni00/DAT-LM-Visualization" target="_blank"> -->
+          <a href="./static/figs/DAT-sa8-ra8-ns1024-sh8-nkvh4-343M-Relational-Attention Relations-Head View.html" target="_blank"> visualizing the internal relational representations of trained DAT language models</a>, we find evidence that they encode human-interpretable semantic relations.</p>
+            {{langfig}}
+
+        </div>
+      </div>
+    </div>
+    <!--/ Experiments. -->
+
+    <!-- Learn More -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Learn More</h2>
+        <div class="content has-text-justified">
+
+          <ul>
+            <li><strong><a href="https://pypi.org/project/dual-attention/" target="_blank"><code>dual-attention</code> Python Package</a></strong>. The <code>dual-attention</code> package published on the Python Package Index implements the Dual Attention Transformer model and its associated layers and modules. The package also includes utilities for visualizing internal representations of pretrained <em>DAT</em> language models as well as loading pretrained model checkpoints from Huggingface.</li>
+            <li><strong><a href="https://dual-attention-transformer.readthedocs.io/" target="_blank">Documentation</a></strong>. The <code>dual-attention</code> documentation provides a user guide for the different components of the package.</li>
+            <li><strong><a href="https://github.com/Awni00/abstract_transformer/" target="_blank">Experiment Code</a></strong>. This is the github repository used throughout the development of the project. It includes the code used to run each set of experiments in the paper together with instructions for reproducing our experimental results.</li>
+            <li><strong><a href="https://wandb.ai/dual-attention/projects" target="_blank">Experimental Logs</a></strong>. This online portal provides full experimental logs through the W&B experiment tracking tool. For each experimental run, this includes the git commit ID associated with the version of the code that was used to run the experiment, the script and command line arguments associated with the experimental run, the hardware used for that run, and metrics tracked over the course of training.</li>
+            <li><strong><a href="https://huggingface.co/collections/awni00/dual-attention-transformer-66c23425a545b0cefe4b9489" target="_blank">Huggingface Collection</a></strong>. This is a collection of model checkpoints and apps associated with the Dual Attention Transformer. In particular, language models trained on the Fineweb dataset can be directly loaded from Huggingface through the <code>dual-attention</code> package (<a href="https://dual-attention-transformer.readthedocs.io/en/latest/model_classes.html#loading-pre-trained-models-from-hugging-face" target="_blank">see documentation</a>). In addition, we also created apps for exploring trained <em>DAT</em> language models:
+              <ul>
+                <li><a href="https://huggingface.co/spaces/awni00/DAT-LM-Inference" target="_blank">Run inference with <em>DAT</em> language models</a></li>
+                <li><a href="https://huggingface.co/spaces/awni00/DAT-LM-Visualization" target="_blank">Visualize the internal representations of <em>DAT</em> language models</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/ Learn More. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code class="language-bibtex">@misc{altabaa2024disentanglingintegratingrelationalsensory,
+      title={Disentangling and Integrating Relational and Sensory Information in Transformer Architectures},
+      author={Awni Altabaa and John Lafferty},
+      year={2024},
+      eprint={2405.16727},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2405.16727},
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href=".">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="." class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer> -->
+
+<!-- Include loaded htmls (Plotly figures) -->
+<!-- <script>
+  includeHTML();
+</script> -->
+
+</body>
+</html>
