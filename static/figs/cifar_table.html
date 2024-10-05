@@ -1,0 +1,55 @@
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Dataset</th>
+        <th>Model</th>
+        <th>Parameter Count</th>
+        <th># Layers</th>
+        <th>$d_{\mathrm{model}}$</th>
+        <th>$n_h^{sa}$</th>
+        <th>$n_h^{ra}$</th>
+        <th>Accuracy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2">CIFAR-10</td>
+        <td><i>ViT</i></td>
+        <td>7.1M</td>
+        <td>8</td>
+        <td>384</td>
+        <td>12</td>
+        <td>0</td>
+        <td>86.4 &plusmn; 0.1%</td>
+      </tr>
+      <tr>
+        <td><i>ViDAT</i></td>
+        <td>6.0M</td>
+        <td>8</td>
+        <td>384</td>
+        <td>6</td>
+        <td>6</td>
+        <td><b>89.7 &plusmn; 0.1%</b></td>
+      </tr>
+      <tr>
+        <td rowspan="2">CIFAR-100</td>
+        <td><i>ViT</i></td>
+        <td>7.2M</td>
+        <td>8</td>
+        <td>384</td>
+        <td>12</td>
+        <td>0</td>
+        <td>68.8 &plusmn; 0.2%</td>
+      </tr>
+      <tr>
+        <td><i>ViDAT</i></td>
+        <td>6.1M</td>
+        <td>8</td>
+        <td>384</td>
+        <td>6</td>
+        <td>6</td>
+        <td><b>70.5 &plusmn; 0.1%</b></td>
+      </tr>
+    </tbody>
+  </table>
+  

@@ -12,6 +12,9 @@ with open(f'{fig_dir}/relgames_learning_curves.html', 'r') as f:
 with open(f'{fig_dir}/math_accuracy_scaling.html', 'r') as f:
     plotly_jinja_data['mathfig'] = f.read()
 
+with open(f'{fig_dir}/cifar_table.html', 'r') as f:
+    plotly_jinja_data['visfig'] = f.read()
+
 with open(f'{fig_dir}/language_modeling_scaling_laws.html', 'r') as f:
     plotly_jinja_data['langfig'] = f.read()
 
