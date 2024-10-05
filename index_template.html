@@ -70,6 +70,28 @@
 </head>
 <body>
 
+<!-- show message to suggest user to rotate to landscape  -->
+
+<script>
+  function checkOrientation() {
+      // const message = document.getElementById('orientation-message');
+      // if (window.innerHeight > window.innerWidth) {
+      if (window.matchMedia("(orientation: portrait)").matches) {
+          // message.style.display = 'block'; // Show message in portrait
+        alert("If you have a small screen, consider rotating to landscape for a better viewing experience.")
+      }
+      // else {
+          // message.style.display = 'none'; // Hide message in landscape
+      // }
+  }
+
+  // window.addEventListener('resize', checkOrientation);
+  // window.addEventListener('orientationchange', checkOrientation);
+
+  // Initial check
+  checkOrientation();
+</script>
+
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -371,7 +393,7 @@
             {{visfig}}
 
           <h3>Language Modeling</h3>
-          <p>Language understanding involves processing and organizing relational information, such as syntactic structures, semantic roles, and contextual dependencies, to extract meaning from words and their connections within sentences. We evaluate the impact of the relational computational mechanisms of <em>DAT</em> in language modeling, training models upto 1.3B parameters in size. We observe improvements in data efficiency and parameter efficiency compared to standard Transformers. By 
+          <p>Language understanding involves processing and organizing relational information, such as syntactic structures, semantic roles, and contextual dependencies, to extract meaning from words and their connections within sentences. We evaluate the impact of the relational computational mechanisms of <em>DAT</em> in language modeling, training models upto 1.3B parameters in size. We observe improvements in data efficiency and parameter efficiency compared to standard Transformers. By
           <!-- <a href="https://huggingface.co/spaces/awni00/DAT-LM-Visualization" target="_blank"> -->
           <a href="./static/figs/DAT-sa8-ra8-ns1024-sh8-nkvh4-343M-Relational-Attention Relations-Head View.html" target="_blank"> visualizing the internal relational representations of trained DAT language models</a>, we find evidence that they encode human-interpretable semantic relations.</p>
             {{langfig}}
