@@ -150,24 +150,12 @@ If you have questions, feel free to file an issue or send an email.
 
 ## Citation
 
-If you use natbib or bibtex please use the following citation (as provided by Google Scholar).
 ```bibtex
-@article{altabaa2024disentangling,
+@inproceedings{altabaa2025disentangling,
     title={Disentangling and Integrating Relational and Sensory Information in Transformer Architectures},
     author={Awni Altabaa and John Lafferty},
-    year={2024},
-    journal={arXiv preprint arXiv:2402.08856}
-}
-```
-
-If you use `biblatex`, please use the following citation (as provided by arxiv).
-```bibtex
-@misc{altabaa2024disentangling,
-    title={Disentangling and Integrating Relational and Sensory Information in Transformer Architectures},
-    author={Awni Altabaa and John Lafferty},
-    year={2024},
-    eprint={2405.16727},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
+    booktitle={Forty-second International Conference on Machine Learning},
+    year={2025},
+    url={https://openreview.net/forum?id=lbrqeIipJr}
 }
 ```
